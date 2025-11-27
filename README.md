@@ -1,4 +1,4 @@
-# monodoc™
+# Monodoc
 
 > **One portal. Every branch. Instant search.**
 >
@@ -13,9 +13,9 @@
 
 ---
 
-## ✨ Why monodoc?
+## ✨ Why Monodoc?
 
-| Problem                              | monodoc Solution                           |
+| Problem                              | Monodoc Solution                           |
 | ------------------------------------ | ------------------------------------------ |
 | Docs scattered across repos/branches | → **Unified view** in one portal           |
 | Can’t search across versions         | → **Cross-branch full-text search**        |
@@ -34,6 +34,8 @@ The system follows a modular design with decoupled components:
 - **Data Sources**: Git repositories (GitHub, GitLab, self-hosted)
 
 ![architecture](docs/assets/architecture.drawio.svg)
+
+> Note: `ui` is not part of this repo, a `monodoc-ui` repo will be create when needed.
 
 ---
 
