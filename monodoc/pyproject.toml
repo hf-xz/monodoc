@@ -5,7 +5,9 @@ description = "Unified documentation platform for multi-repo, multi-branch ecosy
 readme = "README.md"
 authors = [{ name = "hfxz", email = "xuan__zai@outlook.com" }]
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "typer>=0.20.0",
+]
 
 [dependency-groups]
 dev = ["ruff>=0.14.6"]

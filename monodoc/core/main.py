@@ -1,6 +1,2 @@
-def main():
-    print("Hello from monodoc!")
-
-
-if __name__ == "__main__":
-    main()
+def main(name: str):
+    print(f"Hello {name} from monodoc!")
