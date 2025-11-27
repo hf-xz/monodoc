@@ -23,3 +23,6 @@ dev = [
 
 [project.scripts]
 monodoc = "monodoc.cli.main:app"
+
+[tool.uv]
+package = true
