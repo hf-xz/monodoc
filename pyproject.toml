@@ -1,0 +1,29 @@
+[project]
+name = "monodoc"
+version = "0.0.0"
+description = "Unified documentation platform for multi-repo, multi-branch ecosystems."
+readme = "README.md"
+authors = [
+  { name = "hfxz", email = "xuan__zai@outlook.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+  "typer>=0.20.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/hf-xz/monodoc"
+Repository = "https://github.com/hf-xz/monodoc"
+Issues = "https://github.com/hf-xz/monodoc/issues"
+
+[dependency-groups]
+dev = [
+  "pre-commit>=4.5.0",
+  "ruff>=0.14.6",
+]
+
+[project.scripts]
+monodoc = "monodoc.cli.main:app"
+
+[tool.uv]
+package = true
