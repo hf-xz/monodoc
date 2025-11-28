@@ -1,6 +1,6 @@
 [project]
 name = "monodoc"
-dynamic = ["version"]
+version = "0.0.0"
 description = "Unified documentation platform for multi-repo, multi-branch ecosystems."
 readme = "README.md"
 authors = [
