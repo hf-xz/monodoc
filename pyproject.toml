@@ -18,7 +18,8 @@ Issues = "https://github.com/hf-xz/monodoc/issues"
 
 [dependency-groups]
 dev = [
-  "ruff>=0.14.6"
+  "pre-commit>=4.5.0",
+  "ruff>=0.14.6",
 ]
 
 [project.scripts]

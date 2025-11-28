@@ -26,3 +26,11 @@ source .venv/bin/activate  # Linux/macOS
 # then
 monodoc --help
 ```
+
+## Before Commit
+
+Please ensure you've installed our pre-commit hook:
+
+```sh
+pre-commit install
+```
