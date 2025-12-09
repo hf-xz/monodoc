@@ -6,11 +6,14 @@ from typer import Option
 
 from monodoc.config import init_settings
 
+from . import repo
+
 app = typer.Typer(
     context_settings={
         "help_option_names": ["-h", "--help"],
     }
 )
+app.add_typer(repo.app, name="repo", help="Manage Git repositories.")
 
 
 if __name__ == "__main__":
