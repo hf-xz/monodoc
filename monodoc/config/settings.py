@@ -4,7 +4,6 @@ Configuration settings for monodoc application.
 
 from pathlib import Path
 
-from pydantic import DirectoryPath, FilePath
 from pydantic_settings import (
     BaseSettings,
     PydanticBaseSettingsSource,
@@ -46,9 +45,9 @@ class Settings(BaseSettings):
     app_name: str = APP_NAME
 
     # Settings with default values
-    config_file: FilePath = DEFAULT_CONFIG_FILE
-    data_dir: DirectoryPath = DEFAULT_DATA_DIR
-    log_dir: DirectoryPath = DEFAULT_LOG_DIR
+    config_file: Path = DEFAULT_CONFIG_FILE
+    data_dir: Path = DEFAULT_DATA_DIR
+    log_dir: Path = DEFAULT_LOG_DIR
     debug: bool = False
 
     # Pydantic Settings Config
