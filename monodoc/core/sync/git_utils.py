@@ -12,9 +12,10 @@ but for now it serves as a simple and effective way to interact with Git reposit
 
 import os
 import subprocess
+from pathlib import Path
 
 
-def is_repo(path: str) -> bool:
+def is_repo(path: Path) -> bool:
     """
     Checks if the given path is a Git repository.
 
@@ -32,7 +33,7 @@ def is_repo(path: str) -> bool:
     return os.path.isdir(os.path.join(path, ".git"))
 
 
-def init_repo(path: str) -> None:
+def init_repo(path: Path) -> None:
     """
     Initializes a new Git repository at the specified path.
 
@@ -50,7 +51,7 @@ def init_repo(path: str) -> None:
     subprocess.run(["git", "-C", path, "init"], check=True)
 
 
-def clone_repo(path: str, url: str) -> None:
+def clone_repo(path: Path, url: str) -> None:
     """
     Clones a Git repository from the specified URL to the given path.
 
@@ -67,7 +68,7 @@ def clone_repo(path: str, url: str) -> None:
     subprocess.run(["git", "clone", url, path], check=True)
 
 
-def add_remote(path: str, name: str, url: str) -> None:
+def add_remote(path: Path, name: str, url: str) -> None:
     """
     Adds a new remote to the Git repository.
 
@@ -85,7 +86,7 @@ def add_remote(path: str, name: str, url: str) -> None:
     subprocess.run(["git", "-C", path, "remote", "add", name, url], check=True)
 
 
-def remove_remote(path: str, name: str) -> None:
+def remove_remote(path: Path, name: str) -> None:
     """
     Removes a remote from the Git repository.
 
@@ -102,7 +103,7 @@ def remove_remote(path: str, name: str) -> None:
     subprocess.run(["git", "-C", path, "remote", "remove", name], check=True)
 
 
-def delete_branch(path: str, name: str) -> None:
+def delete_branch(path: Path, name: str) -> None:
     """
     Deletes a branch in the Git repository.
 
@@ -119,7 +120,7 @@ def delete_branch(path: str, name: str) -> None:
     subprocess.run(["git", "-C", path, "branch", "-d", name], check=True)
 
 
-def fetch(path: str, remote: str) -> None:
+def fetch(path: Path, remote: str) -> None:
     """
     Fetches updates from the specified remote in the Git repository.
 
@@ -136,7 +137,7 @@ def fetch(path: str, remote: str) -> None:
     subprocess.run(["git", "-C", path, "fetch", remote], check=True)
 
 
-def pull(path: str, remote: str, branch: str) -> None:
+def pull(path: Path, remote: str, branch: str) -> None:
     """
     Pulls updates from the specified remote and branch in the Git repository.
 
