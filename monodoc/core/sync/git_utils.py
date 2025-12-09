@@ -1,4 +1,6 @@
 """
+monodoc.core.sync.git_utils
+---------------------------
 This module contains a set of utility functions for performing common Git operations
 (pure repository/worktree operation wrappers). The design goal is to provide
 lightweight, reusable, and easily testable functions for invoking git behavior

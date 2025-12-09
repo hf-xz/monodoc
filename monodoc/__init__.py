@@ -1,1 +1,5 @@
-"""Monodoc. One portal. Every branch. Instant search."""
+"""
+Monodoc
+-------
+One portal. Every branch. Instant search.
+"""
