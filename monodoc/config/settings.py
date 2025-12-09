@@ -15,7 +15,8 @@ from pydantic_settings import (
 APP_NAME = "monodoc"
 
 DEFAULT_CONFIG_FILE = Path.home() / ".config" / APP_NAME / "config.toml"
-DEFAULT_DATA_DIR = Path.home() / f".{APP_NAME}"
+DEFAULT_DATA_DIR = Path.home() / f".{APP_NAME}" / "data"
+DEFAULT_LOG_DIR = Path.home() / f".{APP_NAME}" / "logs"
 
 
 class DeferredTomlConfigSettingsSource(TomlConfigSettingsSource):
@@ -47,6 +48,7 @@ class Settings(BaseSettings):
     # Settings with default values
     config_file: FilePath = DEFAULT_CONFIG_FILE
     data_dir: DirectoryPath = DEFAULT_DATA_DIR
+    log_dir: DirectoryPath = DEFAULT_LOG_DIR
     debug: bool = False
 
     # Pydantic Settings Config

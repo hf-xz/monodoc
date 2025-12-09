@@ -37,6 +37,7 @@ def goodbye(name: str, formal: bool = False):
 def main(
     config_file: Path | None = Option(None, "--config", "-c", help="Path to configuration file."),
     data_dir: Path | None = Option(None, "--data-dir", help="Path to data directory."),
+    log_dir: Path | None = Option(None, "--log-dir", help="Path to log directory."),
     debug: bool = Option(None, "--debug", "-d", help="Enable debug mode."),
 ):
     """monodoc CLI entry point."""
@@ -45,6 +46,7 @@ def main(
     settings = init_settings(
         config_file=config_file,
         data_dir=data_dir,
+        log_dir=log_dir,
         debug=debug,
     )
 
