@@ -11,7 +11,7 @@ import re
 from pathlib import Path
 from urllib.parse import urlparse
 
-from pydantic import BaseModel, FilePath, field_validator
+from pydantic import BaseModel, DirectoryPath, field_validator
 
 
 class Repo(BaseModel):
@@ -20,7 +20,7 @@ class Repo(BaseModel):
     """
 
     name: str  # name of the repository
-    path: FilePath  # file system path to the repository
+    path: DirectoryPath  # file system path to the repository
     remote_url: str  # remote URL of the repository
     synced_branches: list[str]  # list of synconized branch names
 
@@ -100,28 +100,55 @@ class RepoManager:
     A manager class for handling Git repository operations.
     """
 
+    _instance = None
+
     def __init__(self, repo_list: list[Repo]):
         self.repo_list = repo_list
 
-    def init_repo(self, path: Path, remote_url: str, name: str = "") -> bool:
+    @classmethod
+    def get_instance(cls, repo_list: list[Repo] | None = None):
+        if repo_list is None:
+            # TODO: load from config/storage
+            repo_list = []
+        cls._instance = cls(repo_list)
+        return cls._instance
+
+    def init_repo(self, remote_url: str, path: Path | None = None, name: str = "") -> Repo | None:
         """
         Initializes a new Git repository at the specified path and sets the remote URL.
 
         Args:
-            path (str): The directory path where the repository will be initialized.
             remote_url (str): The URL of the remote repository.
+            path (Path | None): The directory path where the repository will be initialized. Defaults to None.
+            name (str): The name of the repository. Defaults to an empty string.
 
         Returns:
-            bool: True if the repository was initialized, False otherwise.
+            Repo | None: The initialized Repo instance if successful, None otherwise.
 
         Examples:
-            >>> success = RepoManager.init_repo('/path/to/repo', 'url')
+            >>> repo_manager = RepoManager.get_instance()
+            >>> new_repo = repo_manager.init_repo(
+            ...     remote_url='git@github.com:hf-xz/monodoc.git',
+            ... )
+
+            Repository monodoc initialized at /home/user/.monodoc/data/monodoc
         """
-        from monodoc.core.sync.git_utils import add_remote, init_repo, is_repo
+        from monodoc.config import get_settings
+
+        from .git_utils import add_remote, init_repo, is_repo
+
+        settings = get_settings()
 
         name = name.strip()
         if not name:
-            name = get_name_from_URL(remote_url)
+            if path:
+                name = path.stem
+            else:
+                name = get_name_from_URL(remote_url)
+
+        if path is None:
+            path = Path(settings.data_dir) / name
+            path.mkdir(parents=True, exist_ok=True)
 
         try:
             new_repo = Repo(name=name, path=path, remote_url=remote_url, synced_branches=[])
@@ -132,10 +159,11 @@ class RepoManager:
             init_repo(path)
             add_remote(path, "origin", remote_url)
             self.repo_list.append(new_repo)
+            # TODO: persist the repo_list to config/storage
 
-            return True
+            return new_repo
 
         except Exception as e:
             print(f"Failed to create Repo instance: {e}")
 
-            return False
+            return None
