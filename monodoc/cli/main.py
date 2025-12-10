@@ -2,7 +2,6 @@ from pathlib import Path
 
 import rich
 import typer
-from typer import Option
 
 from monodoc.config import init_settings
 
@@ -35,10 +34,10 @@ def goodbye(name: str, formal: bool = False):
 
 @app.callback()
 def main(
-    config_file: Path | None = Option(None, "--config", "-c", help="Path to configuration file."),
-    data_dir: Path | None = Option(None, "--data-dir", help="Path to data directory."),
-    log_dir: Path | None = Option(None, "--log-dir", help="Path to log directory."),
-    debug: bool = Option(None, "--debug", "-d", help="Enable debug mode."),
+    config_file: Path | None = typer.Option(None, "--config", "-c", help="Path to configuration file."),
+    data_dir: Path | None = typer.Option(None, "--data-dir", help="Path to data directory."),
+    log_dir: Path | None = typer.Option(None, "--log-dir", help="Path to log directory."),
+    debug: bool = typer.Option(None, "--debug", "-d", help="Enable debug mode."),
 ):
     """monodoc CLI entry point."""
 
